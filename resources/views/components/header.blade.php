@@ -27,7 +27,7 @@
 <header class="float-start w-100 top-headers-div">
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="{{ URL::to('/') }}">
          <img alt="logo" src="images/logo-uni.png"/>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@
             <a class="nav-link active" href="{{ URL::to('/') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ URL::to('directory') }}">Directory</a>
+            <a class="nav-link" href="{{ route('directory') }}">Directory</a>
           </li>
           <li class="nav-item"></li>
             <a class="nav-link" href="{{ URL::to('contact') }}">Contact</a>
@@ -48,20 +48,54 @@
         </ul>
 
          <div class="cm-right-menus">
+
             <ul class="d-flex align-items-center">
                <li>
-                 <a data-bs-toggle="modal" data-bs-target="#loginModal" class="btn login-btn" class="btn login-btn">
+                @php
+                    if(session('user_id')=='')
+                    {
+                @endphp
+                 <a data-bs-toggle="modal" data-bs-target="#loginModal" class="btn login-btn">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                   </svg>
                    Login </a>
+                   @php
+                     } else {
+                   @endphp
+                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg> {{ session('user_name') }} |
+                   <a href="{{ URL::to('logout') }}" class="btn login-btn"> Logout </a>
+                   @php
+                     }
+                   @endphp
                </li>
                <li>
-                <a href="{{ URL::to('addpost') }}" class="btn add-btn"> Post a Add listing <i class="ri-add-fill"></i>  </a>
+                @php
+                    if(session('user_id')=='')
+                    {
+                @endphp
+                <a data-bs-toggle="modal" data-bs-target="#loginModal" class="btn add-btn">
+                    Post a Add listing <i class="ri-add-fill"></i>
+                </a>
+                @php
+                     } else {
+                @endphp
+                <a href="{{ URL::to('addpost') }}" class="btn add-btn">
+                    Post a Add listing <i class="ri-add-fill"></i>
+                </a>
+                @php
+                     }
+                @endphp
               </li>
             </ul>
+
          </div>
+
+
       </div>
     </div>
   </nav>

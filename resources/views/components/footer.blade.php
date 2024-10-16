@@ -116,7 +116,8 @@
        </div>
        <div class="modal-body">
 
-          <form action="index.html" method="get">
+            <form id="loginForm" method="POST">
+              @csrf
              <div id="login-td-div" class="com-div-md">
 
                <h5 class="mb-3 text-center"> Login </h5>
@@ -126,11 +127,13 @@
                  </svg>
                </button>
                <div class="login-modal-pn">
-
+                
                <div class="mt-3 cm-select-login">
+
+                 <div id="error-message" class="alert alert-danger" style="display: none;"></div>
                  <div class="country-dp">
 
-                   <input type="email" name="user" class="form-control" placeholder="Username Or Email" required />
+                   <input type="email" name="email" class="form-control" placeholder="Username Or Email" required />
                  </div>
                  <div class="phone-div">
 
@@ -160,12 +163,12 @@
     </div>
     </div>
 
-
     <div class="modal fade login-div-modal" id="registerModal">
     <div class="modal-dialog modal-dialog-centered">
      <div class="modal-content">
        <div class="modal-body">
-         <form action="index.html" method="get">
+         <form action="{{ route('register.store') }}" method="POST">
+           @csrf
              <div class="com-div-md">
 
                <h5 class="mb-3 text-center"> Free Register </h5>
@@ -179,7 +182,7 @@
                <div class="mt-0 cm-select-login">
                  <div class="country-dp">
 
-                   <input type="text" name="fullname" class="form-control" placeholder="Full Name" required />
+                   <input type="text" name="name" class="form-control" placeholder="Full Name" required />
                  </div>
                  <div class="phone-div">
 
@@ -187,11 +190,12 @@
                  </div>
                  <div class="phone-div">
 
-                   <input type="password" name="password" class="form-control" placeholder="Create Password" required />
+                   <input type="password" id="password" name="password" class="form-control" placeholder="Create Password" required />
                  </div>
                  <div class="phone-div">
 
-                   <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password" required />
+                   <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Confirm Password" required />
+                   <div id="passwordMismatch" class="text-danger" style="display: none;">Passwords do not match</div>
                  </div>
 
                  <div class="mt-3 ml-3 forget2 d-flex justify-content-between">
@@ -224,6 +228,65 @@
   <script src="js/jquery.min.js" ></script>
   <script src="js/custom.js" ></script>
   <script src="js/owl.carousel.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+        $('#password_confirmation').on('input', function() {
+            var password = $('#password').val();
+            var passwordConfirm = $(this).val();
+
+            if (password !== passwordConfirm) {
+                $('#passwordMismatch').show();
+            } else {
+                $('#passwordMismatch').hide();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#loginForm').on('submit', function(e) {
+            e.preventDefault(); 
+
+           
+            $('#error-message').hide().empty();
+
+            // Get form data
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("login") }}', // Your login route
+                data: formData,
+                success: function(response) {
+                 
+                    window.location.href = '{{ route("directory") }}'; 
+                },
+                error: function(xhr) {
+                    // Handle validation errors
+                    if (xhr.status === 422) {
+                        var errors = xhr.responseJSON.errors;
+                        $.each(errors, function(key, value) {
+                            $('#error-message').append('<div>' + value[0] + '</div>');
+                        });
+                        $('#error-message').show(); 
+                    } else {
+                        $('#error-message').append('<div>Something went wrong. Please try again later.</div>');
+                        $('#error-message').show();
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Automatically check the checkbox when the page loads
+        $('#exampleCheck1').prop('checked', true);
+    });
+</script>
 
 
   </body>

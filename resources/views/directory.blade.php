@@ -12,7 +12,6 @@
     </div>
   </section>
 
-
   <main class="float-start w-100 main-body ">
 
        <div class="container">
@@ -304,18 +303,9 @@
                                           Used
                                         </label>
                                     </div>
-
-
-
-
-
                                 </div>
                               </div>
                             </div>
-
-
-
-
                           <input type="submit" class="btn submit-btn btn-all w-100" value="Filter"/>
 
                       </div>
@@ -325,8 +315,8 @@
               <div class="col-lg-9">
                   <div class="mt-5 mb-5 row row-cols-2 mt-lg-0 justify-content-between align-content-center">
                       <div class="col">
-                         <h5 class="m-0 mb-lg-0 tiuys-text">Exoctic Roses  </h5>
-                         <p class="mt-3 sub-iti"> Showing <strong> 50 </strong> results as per your search criteria </p>
+                         <h5 class="m-0 mb-lg-0 tiuys-text">Show All Items  </h5>
+                         <p class="mt-3 sub-iti"> Showing <strong> {{ count($posts) }} </strong> results as per your search criteria </p>
                       </div>
                       <div class="col d-flex justify-content-end align-items-center">
 
@@ -355,233 +345,38 @@
                  </div>
                  <div id="products" class="mt-4">
                       <div class="mb-5 row gy-5 g-lg-4">
-
+                      @foreach ($posts as $post)
                          <div class="item list-item col-md-6 col-lg-6 col-xl-4 view-group grid-group-item collist">
                            <div class="bg-white comons-items-divs comon-items-d1 w-100">
                               <div class="img-box-post left-div-list">
-                               <a href="listing-details.html"> <img alt="postpic" src="images/IMG_3107-1x1-1.jpg"/> </a>
+                               <a href="listing-details.html">
+                                    @if ($post->photos)
+                                        @php
+                                            $imagePaths = explode(',', $post->photos); // Split the string into an array
+                                        @endphp
+                                        <img alt="postpic" src="{{ asset($imagePaths[0]) }}"/> <!-- Display the first image -->
+                                       @else
+                                         <img alt="postpic" src="{{ asset('images/default-image.jpg') }}"/> <!-- Default image if no photos -->
+                                    @endif </a>
                               </div>
                               <div class="pt-3 contents-div right-list-div">
-                                <h5> Finance Internship NYC </h5>
-                                <h2 class="mt-2 mb-3"> 190.00 $ </h2>
-                                <p class="mb-3 para-details"> Pellentesque rhoncus arcu ac felis pharetra, in pharetra metus venenatis. Donec ex risus, sagittis eu lectus sed,
-                                   sodales auctor sapien. Quisque molestie lorem ipsum, quis</p>
-                                <p class="cm-tags"> <i class="ri-folder-5-line"></i>  Intern Abroad HQ </p>
+                                <h5> {{ $post->item_title }} </h5>
+                                <h2 class="mt-2 mb-3"> {{ $post->price }}  </h2>
+                                <p class="mb-3 para-details"> {{ $post->item_description }}</p>
+                                <p class="cm-tags"> <i class="ri-folder-5-line"></i>  {{ $post->transaction}}</p>
                                 <p class="mt-2 cm-tags"> <i class="ri-time-line"></i> 10 Days ago </p>
                                  <div class="mt-3 d-flex ft-li align-items-center">
-                                    <p> Ireton, US </p>
+                                    <p> {{ $post->address}}</p>
                                     <a href="#"> <i class="ri-heart-line"></i> </a>
                                  </div>
                               </div>
 
-
                            </div>
-
-
                          </div>
-
-                         <div class="item list-item col-md-6 col-lg-6 col-xl-4 view-group grid-group-item collist">
-
-                              <div class="bg-white comons-items-divs comon-items-d1 w-100">
-                                  <div class="img-box-post left-div-list">
-                                      <a href="listing-details.html"> <img alt="postpic" src="images/projectrs1.jpg"/> </a>
-                                  </div>
-                              <div class="pt-3 contents-div right-list-div">
-                                  <h5> Finance Internship NYC </h5>
-                                  <h2 class="mt-2 mb-3"> 190.00 $ </h2>
-                                  <p class="mb-3 para-details"> Pellentesque rhoncus arcu ac felis pharetra, in pharetra metus venenatis. Donec ex risus, sagittis eu lectus sed,
-                                      sodales auctor sapien. Quisque molestie lorem ipsum, quis</p>
-                                  <p class="cm-tags"> <i class="ri-folder-5-line"></i>  Intern Abroad HQ </p>
-                                  <p class="mt-2 cm-tags"> <i class="ri-time-line"></i> 10 Days ago </p>
-                                  <div class="mt-3 d-flex ft-li align-items-center">
-                                      <p> Ireton, US </p>
-                                      <a href="#"> <i class="ri-heart-line"></i> </a>
-                                  </div>
-                              </div>
+                        @endforeach
 
 
-                              </div>
-
-                         </div>
-
-                         <div class="item list-item col-md-6 col-lg-6 col-xl-4 view-group grid-group-item collist">
-
-                              <div class="bg-white comons-items-divs comon-items-d1 w-100">
-                                  <div class="img-box-post left-div-list">
-                                      <a href="listing-details.html"> <img alt="postpic" src="images/Choice+(1).png"/> </a>
-                                  </div>
-                                  <div class="pt-3 contents-div right-list-div">
-                                      <h5> Finance Internship NYC </h5>
-                                      <h2 class="mt-2 mb-3"> 190.00 $ </h2>
-                                      <p class="mb-3 para-details"> Pellentesque rhoncus arcu ac felis pharetra, in pharetra metus venenatis. Donec ex risus, sagittis eu lectus sed,
-                                          sodales auctor sapien. Quisque molestie lorem ipsum, quis</p>
-                                      <p class="cm-tags"> <i class="ri-folder-5-line"></i>  Intern Abroad HQ </p>
-                                      <p class="mt-2 cm-tags"> <i class="ri-time-line"></i> 10 Days ago </p>
-                                      <div class="mt-3 d-flex ft-li align-items-center">
-                                          <p> Ireton, US </p>
-                                          <a href="#"> <i class="ri-heart-line"></i> </a>
-                                      </div>
-                                  </div>
-
-                              </div>
-
-                          </div>
-
-                          <div class="item list-item col-md-6 col-lg-6 col-xl-4 view-group grid-group-item collist">
-
-                              <div class="bg-white comons-items-divs comon-items-d1 w-100">
-                                  <div class="img-box-post left-div-list">
-                                      <a href="listing-details.html"> <img alt="postpic" src="images/pro2.jpeg"/> </a>
-                                  </div>
-                                  <div class="pt-3 contents-div right-list-div">
-                                      <h5> Finance Internship NYC </h5>
-                                      <h2 class="mt-2 mb-3"> 190.00 $ </h2>
-                                      <p class="mb-3 para-details"> Pellentesque rhoncus arcu ac felis pharetra, in pharetra metus venenatis. Donec ex risus, sagittis eu lectus sed,
-                                          sodales auctor sapien. Quisque molestie lorem ipsum, quis</p>
-                                      <p class="cm-tags"> <i class="ri-folder-5-line"></i>  Intern Abroad HQ </p>
-                                      <p class="mt-2 cm-tags"> <i class="ri-time-line"></i> 10 Days ago </p>
-                                      <div class="mt-3 d-flex ft-li align-items-center">
-                                          <p> Ireton, US </p>
-                                          <a href="#"> <i class="ri-heart-line"></i> </a>
-                                      </div>
-                                  </div>
-
-                              </div>
-
-                          </div>
-
-
-                          <div class="item list-item col-md-6 col-lg-6 col-xl-4 view-group grid-group-item collist">
-
-                              <div class="bg-white comons-items-divs comon-items-d1 w-100">
-                                  <div class="img-box-post left-div-list">
-                                      <a href="listing-details.html"> <img alt="postpic" src="images/proh.png"/> </a>
-                                  </div>
-                                  <div class="pt-3 contents-div right-list-div">
-                                      <h5> Finance Internship NYC </h5>
-                                      <h2 class="mt-2 mb-3"> 190.00 $ </h2>
-                                      <p class="mb-3 para-details"> Pellentesque rhoncus arcu ac felis pharetra, in pharetra metus venenatis. Donec ex risus, sagittis eu lectus sed,
-                                          sodales auctor sapien. Quisque molestie lorem ipsum, quis</p>
-                                      <p class="cm-tags"> <i class="ri-folder-5-line"></i>  Intern Abroad HQ </p>
-                                      <p class="mt-2 cm-tags"> <i class="ri-time-line"></i> 10 Days ago </p>
-                                      <div class="mt-3 d-flex ft-li align-items-center">
-                                          <p> Ireton, US </p>
-                                          <a href="#"> <i class="ri-heart-line"></i> </a>
-                                      </div>
-                                  </div>
-
-                              </div>
-
-                          </div>
-
-
-                          <div class="item list-item col-md-6 col-lg-6 col-xl-4 view-group grid-group-item collist">
-
-                              <div class="bg-white comons-items-divs comon-items-d1 w-100">
-                                  <div class="img-box-post left-div-list">
-                                      <a href="listing-details.html"> <img alt="postpic" src="images/6620f64f753cb24610097335_Intern UK Placement New Thumbnail.jpg"/> </a>
-                                  </div>
-                                  <div class="pt-3 contents-div right-list-div">
-                                      <h5> Finance Internship NYC </h5>
-                                      <h2 class="mt-2 mb-3"> 190.00 $ </h2>
-                                      <p class="mb-3 para-details"> Pellentesque rhoncus arcu ac felis pharetra, in pharetra metus venenatis. Donec ex risus, sagittis eu lectus sed,
-                                          sodales auctor sapien. Quisque molestie lorem ipsum, quis</p>
-                                      <p class="cm-tags"> <i class="ri-folder-5-line"></i>  Intern Abroad HQ </p>
-                                      <p class="mt-2 cm-tags"> <i class="ri-time-line"></i> 10 Days ago </p>
-                                      <div class="mt-3 d-flex ft-li align-items-center">
-                                          <p> Ireton, US </p>
-                                          <a href="#"> <i class="ri-heart-line"></i> </a>
-                                      </div>
-                                  </div>
-
-                              </div>
-
-                          </div>
-
-
-                          <div class="item list-item col-md-6 col-lg-6 col-xl-4 view-group grid-group-item collist">
-
-                              <div class="bg-white comons-items-divs comon-items-d1 w-100">
-                                  <div class="img-box-post left-div-list">
-                                      <a href="listing-details.html"> <img alt="postpic" src="images/best-project-managment-blog.webp"/> </a>
-                                  </div>
-                                  <div class="pt-3 contents-div right-list-div">
-                                      <h5> Finance Internship NYC </h5>
-                                      <h2 class="mt-2 mb-3"> 190.00 $ </h2>
-                                      <p class="mb-3 para-details"> Pellentesque rhoncus arcu ac felis pharetra, in pharetra metus venenatis. Donec ex risus, sagittis eu lectus sed,
-                                          sodales auctor sapien. Quisque molestie lorem ipsum, quis</p>
-                                      <p class="cm-tags"> <i class="ri-folder-5-line"></i>  Intern Abroad HQ </p>
-                                      <p class="mt-2 cm-tags"> <i class="ri-time-line"></i> 10 Days ago </p>
-                                      <div class="mt-3 d-flex ft-li align-items-center">
-                                          <p> Ireton, US </p>
-                                          <a href="#"> <i class="ri-heart-line"></i> </a>
-                                      </div>
-                                  </div>
-
-                              </div>
-
-                          </div>
-
-
-                          <div class="item list-item col-md-6 col-lg-6 col-xl-4 view-group grid-group-item collist">
-
-                              <div class="bg-white comons-items-divs comon-items-d1 w-100">
-                                  <div class="img-box-post left-div-list">
-                                      <a href="listing-details.html"> <img alt="postpic" src="images/best-project-managment-blog.webp"/> </a>
-                                  </div>
-                                  <div class="pt-3 contents-div right-list-div">
-                                      <h5> Finance Internship NYC </h5>
-                                      <h2 class="mt-2 mb-3"> 190.00 $ </h2>
-                                      <p class="mb-3 para-details"> Pellentesque rhoncus arcu ac felis pharetra, in pharetra metus venenatis. Donec ex risus, sagittis eu lectus sed,
-                                          sodales auctor sapien. Quisque molestie lorem ipsum, quis</p>
-                                      <p class="cm-tags"> <i class="ri-folder-5-line"></i>  Intern Abroad HQ </p>
-                                      <p class="mt-2 cm-tags"> <i class="ri-time-line"></i> 10 Days ago </p>
-                                      <div class="mt-3 d-flex ft-li align-items-center">
-                                          <p> Ireton, US </p>
-                                          <a href="#"> <i class="ri-heart-line"></i> </a>
-                                      </div>
-                                  </div>
-
-                              </div>
-
-                          </div>
-
-
-                          <div class="item list-item col-md-6 col-lg-6 col-xl-4 view-group grid-group-item collist">
-
-                              <div class="bg-white comons-items-divs comon-items-d1 w-100">
-                                  <div class="img-box-post left-div-list">
-                                      <a href="listing-details.html"> <img alt="postpic" src="images/best-project-managment-blog.webp"/> </a>
-                                  </div>
-                                  <div class="pt-3 contents-div right-list-div">
-                                      <h5> Finance Internship NYC </h5>
-                                      <h2 class="mt-2 mb-3"> 190.00 $ </h2>
-                                      <p class="mb-3 para-details"> Pellentesque rhoncus arcu ac felis pharetra, in pharetra metus venenatis. Donec ex risus, sagittis eu lectus sed,
-                                          sodales auctor sapien. Quisque molestie lorem ipsum, quis</p>
-                                      <p class="cm-tags"> <i class="ri-folder-5-line"></i>  Intern Abroad HQ </p>
-                                      <p class="mt-2 cm-tags"> <i class="ri-time-line"></i> 10 Days ago </p>
-                                      <div class="mt-3 d-flex ft-li align-items-center">
-                                          <p> Ireton, US </p>
-                                          <a href="#"> <i class="ri-heart-line"></i> </a>
-                                      </div>
-                                  </div>
-
-                              </div>
-
-                          </div>
-
-
-                      </div>
-
-
-
-
-
-
-
-                      <!-- <a class="mx-auto btn btn-venu btn-all d-table load-more3"> Load more </a> -->
-
-                      <nav class="mx-auto mb-5 d-table">
+                      <!--<nav class="mx-auto mb-5 d-table">
                           <ul class="pagination">
                             <li class="page-item disabled">
                               <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -595,7 +390,7 @@
                               <a class="page-link" href="#">Next</a>
                             </li>
                           </ul>
-                      </nav>
+                      </nav>-->
 
                   </div>
               </div>

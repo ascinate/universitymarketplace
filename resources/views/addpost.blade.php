@@ -24,20 +24,22 @@
                   <p class="mt-1"> You can buy or sell anything with the classiads platform easy and user friendly </p>
                 </div>
 
+           <form name="frmadd" action="{{ URL::to('addposts') }}" method="POST" enctype="multipart/form-data">
+             @csrf
               <div class="mt-4 card w-100">
                   <div class="card-header">
                       Category
                   </div>
                   <div class="p-4 c-details w-100 d-inline-block">
                       <div class="form-group">
-                          <label class="form-label"> Select best-matching category* </label>
-                          <select class="form-select" aria-label="Default select example">
-                              <option selected> Category </option>
-                              <option value="1"> Web Scraping</option>
-                              <option value="2">Finance advisory</option>
-                              <option value="3">Bloging</option>
-                              <option value="3">Health</option>
-                          </select>
+                      <label class="form-label"> Select best-matching category* </label>
+                    <select class="form-select" name="category" aria-label="Default select example" required>
+                        <option selected disabled> Category </option>
+                        <option value="Web Scraping"> Web Scraping</option>
+                        <option value="Finance advisory"> Finance advisory</option>
+                        <option value="Blogging"> Blogging</option>
+                        <option value="Health"> Health</option>
+                    </select>
                       </div>
 
                   </div>
@@ -52,44 +54,39 @@
                           <div class="col-lg-12">
                               <div class="form-group">
                                   <label class="form-label"> Where is your item located?* </label>
-                                  <select class="form-select" aria-label="Default select example">
-                                      <option selected> City/Region </option>
-                                      <option value="1"> Japan </option>
-                                      <option value="2"> Franch </option>
-                                      <option value="3"> UK </option>
-                                      <option value="3"> India </option>
-                                  </select>
+                                    <select class="form-select" name="location" required>
+                                        <option selected disabled> City/Region </option>
+                                        <option value="Japan"> Japan </option>
+                                        <option value="Franch"> Franch </option>
+                                        <option value="UK"> UK </option>
+                                        <option value="India"> India </option>
+                                    </select>
                               </div>
                           </div>
 
                           <div class="col-lg-4">
                               <div class="form-group">
                                   <label class="form-label"> City Area </label>
-                                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                  <input type="text"name="city" class="form-control" required>
                               </div>
                           </div>
 
                           <div class="col-lg-4">
                               <div class="form-group">
                                   <label class="form-label">  Address </label>
-                                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                  <input type="text" name="address" class="form-control" required>
                               </div>
                           </div>
 
                           <div class="col-lg-4">
                               <div class="form-group">
                                   <label class="form-label">  ZIP </label>
-                                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                  <input type="text" name="zip" class="form-control" required>
                               </div>
                           </div>
-
-
                        </div>
-
-
                   </div>
               </div>
-
 
               <div class="mt-4 card w-100">
                   <div class="card-header">
@@ -100,36 +97,26 @@
                           <div class="col-lg-4">
                               <div class="form-group">
                                   <label class="form-label"> Your Name </label>
-                                  <input type="text" class="form-control" id="exampleInputEmail1" />
+                                  <input type="text" name="name" class="form-control" required/>
                               </div>
                           </div>
 
                           <div class="col-lg-4">
                               <div class="form-group">
                                   <label class="form-label"> Mobile Phone </label>
-                                  <input type="text" class="form-control" id="exampleInputEmail1" />
+                                  <input type="text" name="phone" class="form-control" required />
                               </div>
                           </div>
 
                           <div class="col-lg-4">
                               <div class="form-group">
                                   <label class="form-label">  E-mail* </label>
-                                  <input type="text" class="form-control" id="exampleInputEmail1" />
+                                  <input type="text" name="email" class="form-control" required />
                               </div>
                           </div>
-
-                          <div class="col-lg-12">
-                              Not registered yet? <a href="#" class="giup"> Sign-up </a> and publish listings faster
-                          </div>
-
-
-
                        </div>
-
-
                   </div>
               </div>
-
 
               <div class="mt-4 card w-100">
                   <div class="card-header">
@@ -141,66 +128,41 @@
                               <div class="form-group d-flex">
                                   <select class="form-select w-25">
                                       <option selected>USD($)</option>
-                                      <option value="1">EUR</option>
-                                      <option value="2">INR</option>
                                   </select>
-                                  <input type="text w-75" class="form-control" />
+                                  <input type="text w-75" name="price" class="form-control" required/>
                               </div>
                           </div>
 
                           <div class="col-lg-6">
-                              <div class="d-flex align-items-center">
-                                   <div class="form-check">
-                                      <input class="form-check-input" type="radio" value="" id="flexCheckDefault">
-                                      <label class="form-check-label" for="flexCheckDefault">
-                                        Free
-                                      </label>
-                                    </div>
-                                    <div class="form-check ms-3">
-                                      <input class="form-check-input" type="radio" value="" id="flexCheckChecked" checked>
-                                      <label class="form-check-label" for="flexCheckChecked">
-                                        Deal
-                                      </label>
-                                    </div>
+
+                          </div>
+
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                              <label class="form-label"> Transaction </label>
+                                <select class="form-select" name="transaction" aria-label="Default select example">
+                                    <option selected disabled> Transaction </option>
+                                    <option value="Test 1"> Test 1 </option>
+                                    <option value="Test 2"> Test 2 </option>
+                                </select>
                               </div>
                           </div>
 
                           <div class="col-lg-6">
                               <div class="form-group">
-                                  <label class="form-label">  Transaction </label>
-                                  <select class="form-select">
-                                      <option selected> Transaction </option>
-                                      <option value="1"> Japan </option>
-                                      <option value="2"> Franch </option>
-                                      <option value="3"> UK </option>
-                                      <option value="3"> India </option>
-                                  </select>
+                              <label class="form-label"> Condition </label>
+                                <select class="form-select" name="conditions" aria-label="Default select example">
+                                    <option selected disabled> Condition </option>
+                                    <option value="New"> New </option>
+                                    <option value="Used"> Used </option>
+                                    <option value="Refurbished"> Refurbished </option>
+                                    <option value="For Parts"> For Parts </option>
+                                </select>
                               </div>
                           </div>
-
-                          <div class="col-lg-6">
-                              <div class="form-group">
-                                  <label class="form-label">  Condition </label>
-                                  <select class="form-select">
-                                      <option selected> Condition </option>
-                                      <option value="1"> Japan </option>
-                                      <option value="2"> Franch </option>
-                                      <option value="3"> UK </option>
-                                      <option value="3"> India </option>
-                                  </select>
-                              </div>
-                          </div>
-
-
-
-
-
                        </div>
-
-
                   </div>
               </div>
-
 
               <div class="mt-4 card w-100">
                   <div class="card-header">
@@ -210,7 +172,7 @@
                        <div class="row align-items-center gy-4">
 
 
-                          <div class="col-lg-6">
+                          <!-- <div class="col-lg-6">
                               <div class="d-flex align-items-center">
                                    <div class="form-check">
                                       <input class="form-check-input" type="radio" name="lang" value="" id="flexCheckDefaultl">
@@ -243,32 +205,24 @@
                                       </label>
                                     </div>
                               </div>
-                          </div>
+                          </div> -->
 
                           <div class="col-lg-12">
                               <div class="form-group">
                                   <label class="form-label">  Title * </label>
-                                  <input type="text" class="form-control" id="exampleInputEmail1" />
+                                  <input type="text" name="item_title" class="form-control" required />
                               </div>
                           </div>
 
                           <div class="col-lg-12">
                               <div class="form-group">
                                   <label class="form-label">  Description * </label>
-                                  <textarea class="form-control dest-div" ></textarea>
+                                  <textarea class="form-control dest-div" name="item_description" required></textarea>
                               </div>
                           </div>
-
-
-
-
-
                        </div>
-
-
                   </div>
               </div>
-
 
               <div class="mt-4 card w-100">
                   <div class="card-header">
@@ -280,26 +234,18 @@
                           <div class="upload__btn-box">
                             <label class="upload__btn btn-all">
                               <p> <i class="ri-folder-image-line"></i> Upload images</p>
-                              <input type="file" multiple="" data-max_length="20" class="upload__inputfile">
+                              <input type="file" name="photos[]" multiple class="upload__inputfile" required>
                             </label>
                           </div>
                           <div class="p-4 upload__img-wrap bg-light"></div>
                         </div>
-
-
                   </div>
               </div>
-
-              <button type="button" class="mt-4 btn btn-all w-100"> Publish item </button>
-
+              <button type="submit" class="mt-4 btn btn-all w-100"> Publish item </button>
+           </form>
             </div>
-
-
-
          </div>
       </div>
-
   </main>
-
 
 <x-footer/>
