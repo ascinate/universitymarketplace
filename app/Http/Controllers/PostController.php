@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
     public function store(Request $request)
     {
-        $post = new Post();
-
         $request->validate([
-            'category' => 'required|integer',
+            'category' => 'required|string',
             'location' => 'required|string',
             'city' => 'required|string',
             'address' => 'required|string',
@@ -29,44 +28,53 @@ class PostController extends Controller
              'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        
+
         $photos = '';
         if ($request->hasFile('photos')) {
             $imagePaths = [];
 
             foreach ($request->file('photos') as $image) {
                 $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->move(public_path('uploads'), $imageName);
-                $imagePaths[] = 'uploads/' . $imageName;
+                $image->move('uploads', $imageName);
+                $imagePaths[] = $imageName;
             }
             $photos = implode(',', $imagePaths);
         }
-
-
-        Post::create([
-            'userid' => session('user_id'),
-            'category' => $request->input('category'),
-            'location' => $request->input('location'),
-            'city' => $request->input('city'),
-            'address' => $request->input('address'),
-            'zip' => $request->input('zip'),
-            'name' => $request->input('name'),
-            'phone' => $request->input('phone'),
-            'email' => $request->input('email'),
-            'price' => $request->input('price'),
-            'transaction' => $request->input('transaction'),
-            'conditions' => $request->input('conditions'),
-            'item_title' => $request->input('item_title'),
-            'item_description' => $request->input('item_description'),
-            'photos' => $photos,
-
-        ]);
-
-        return redirect('directory')->back()->with('success', 'Post created successfully!');
+      
+        $post = new Post();
+        $post->userid = Session::get('user_id');
+        $post->category = $request->category; 
+        $post->location = $request->location;
+        $post->city = $request->city;
+        $post->address = $request->address;
+        $post->zip = $request->zip;
+        $post->name = $request->name;
+        $post->phone = $request->phone;
+        $post->email = $request->email;
+        $post->price = $request->price;
+        $post->transaction = $request->transaction;
+        $post->conditions = $request->conditions;
+        $post->item_title = $request->item_title;
+        $post->item_description = $request->item_description;
+        $post->photos = $photos;
+    
+        $post->save();
+        return redirect('directory');
     }
 
     public function index()
     {
         $posts = Post::all();
         return view('directory', ['posts' => $posts]);
+    }
+
+    public function show($id)
+    {
+        $data = Post::find($id);
+        $relatedProducts = Post::where('category', $data->category)
+                            ->where('id', '!=', $data->id)
+                            ->get();
+        return view('details', ['data' => $data,'relatedProducts' => $relatedProducts]);
     }
 }

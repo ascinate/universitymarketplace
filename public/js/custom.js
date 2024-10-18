@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 
 	$('.shop-slider').owlCarousel({
-		loop: true,
+		loop: false,
 		margin:20,
 		autoplay:true,
 		nav:false,
@@ -117,7 +117,7 @@ $(document).ready(function() {
 $(document).ready(function () {
 	var sync1 = $("#sync1");
 	var sync2 = $("#sync2");
-	var slidesPerPage = 3; //globaly define number of elements per page
+	var slidesPerPage = 4; //globaly define number of elements per page
 	var syncedSecondary = true;
   
 	sync1

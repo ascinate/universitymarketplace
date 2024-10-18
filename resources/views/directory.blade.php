@@ -349,15 +349,16 @@
                          <div class="item list-item col-md-6 col-lg-6 col-xl-4 view-group grid-group-item collist">
                            <div class="bg-white comons-items-divs comon-items-d1 w-100">
                               <div class="img-box-post left-div-list">
-                               <a href="listing-details.html">
+                               <a href="{{ URL::to('details/'. $post->id) }}">
                                     @if ($post->photos)
                                         @php
                                             $imagePaths = explode(',', $post->photos); // Split the string into an array
                                         @endphp
-                                        <img alt="postpic" src="{{ asset($imagePaths[0]) }}"/> <!-- Display the first image -->
+                                        <img alt="postpic" src="uploads/{{ $imagePaths[0] }}"/> <!-- Display the first image -->
                                        @else
                                          <img alt="postpic" src="{{ asset('images/default-image.jpg') }}"/> <!-- Default image if no photos -->
-                                    @endif </a>
+                                    @endif 
+                                </a>
                               </div>
                               <div class="pt-3 contents-div right-list-div">
                                 <h5> {{ $post->item_title }} </h5>

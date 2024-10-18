@@ -4,7 +4,7 @@
          <div class="col">
            <div class="logos-details">
               <a href="#" class="logos">
-                 <img alt="log" src="images/logo-uni-white.png"/>
+                 <img alt="log" src="{{asset('images/logo-uni-white.png')}}"/>
               </a>
               <p class="mt-3"> Contrary to popular belief, Lorem Ipsum is not simply random text.
                  It has roots in a piece of classical</p>
@@ -224,10 +224,10 @@
   </div>
 
 
-  <script src="js/bootstrap.bundle.min.js" ></script>
-  <script src="js/jquery.min.js" ></script>
-  <script src="js/custom.js" ></script>
-  <script src="js/owl.carousel.min.js"></script>
+  <script src="{{asset('js/bootstrap.bundle.min.js')}}" ></script>
+  <script src="{{asset('js/jquery.min.js')}}" ></script>
+  <script src="{{asset('js/custom.js')}}" ></script>
+  <script src="{{asset('js/owl.carousel.min.js')}}"></script>
 
   <script>
     $(document).ready(function() {
